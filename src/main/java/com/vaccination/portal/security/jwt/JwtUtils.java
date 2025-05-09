@@ -22,6 +22,7 @@ public class JwtUtils {
   private String jwtSecret;
 
 
+
   public String generateJwtToken(Authentication authentication) {
 
     UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
