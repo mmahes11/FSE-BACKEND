@@ -172,3 +172,56 @@ This RESTful API provides endpoints for managing users, students, vaccination dr
 
 ---
 
+## Database Schema
+
+The project uses a PostgreSQL database. Below are the key tables and relationships for the vaccination portal backend:
+
+### Tables
+
+- **users**
+  - `id` (PK): integer, auto-increment
+  - `username`: string, unique, required
+  - `email`: string, unique, required
+  - `password`: string, required
+
+- **roles**
+  - `id` (PK): integer, auto-increment
+  - `name`: string, unique, required
+
+- **user_roles**
+  - `user_id` (FK → users.id)`
+  - `role_id` (FK → roles.id)`
+  - Composite primary key: (`user_id`, `role_id`)
+
+- **student**
+  - `id` (PK): integer, auto-increment
+  - `name`: string, required
+  - `age`: integer
+  - `class_name`: string
+  - `vaccination_status`: string
+
+- **vaccination_drive**
+  - `id` (PK): integer, auto-increment
+  - `vaccine_name`: string, required
+  - `drive_date`: date, required
+  - `available_doses`: integer, required
+  - `applicable_classes`: string
+
+- **vaccination_record**
+  - `id` (PK): integer, auto-increment
+  - `student_id` (FK → student.id): integer
+  - `drive_id` (FK → vaccination_drive.id): integer
+  - `vaccination_date`: date, required
+
+### Relationships
+
+- **users ↔ roles:** Many-to-many, via `user_roles`
+- **vaccination_record → student:** Many-to-one (each record references one student)
+- **vaccination_record → vaccination_drive:** Many-to-one (each record references one drive)
+
+---
+
+**Note:**  
+All tables use auto-incrementing integer IDs as primary keys. Foreign key constraints ensure data integrity between related records.
+
+
