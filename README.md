@@ -1,5 +1,7 @@
 # FULL STACK APPLICATION DEVELOPMENT ASSIGNMENT- WEB APPLICATION DEVELOPMENT
 
+# Vaccination Portal Backend API
+
 # Spring Boot JWT Authentication with Spring Security & Spring Data JPA for SCHOOL VACCINATION PORTAL
 
 ## User Registration, User Login and Authorization process.
@@ -72,8 +74,101 @@ INSERT INTO roles(name) VALUES('ROLE_MODERATOR');
 INSERT INTO roles(name) VALUES('ROLE_ADMIN');
 ```
 
-> Documentation: [Spring Boot and Swagger 3 example](https://www.bezkoder.com/spring-boot-swagger-3/)
 
-> [React + Spring Boot + PostgreSQL example](https://bezkoder.com/spring-boot-react-postgresql/)
+This RESTful API provides endpoints for managing users, students, vaccination drives, and vaccination records. It is designed for educational or institutional vaccination management use cases.
 
-> [Integrate React.js with Spring Boot Rest API](https://bezkoder.com/integrate-reactjs-spring-boot/)
+---
+
+## Table of Contents
+
+- [Authentication](#authentication)
+- [Student Management](#student-management)
+- [Vaccination Drive Management](#vaccination-drive-management)
+- [Vaccination Record Management](#vaccination-record-management)
+- [Notes](#notes)
+
+---
+
+## Authentication
+
+- **User Sign Up**
+    - **POST** `/api/auth/signup`
+    - Register a new user account (roles supported: user, admin, moderator).
+    - **Request Body:** `username`, `email`, `password`, and optional `roles`.
+
+- **User Sign In**
+    - **POST** `/api/auth/signin`
+    - Authenticate user credentials. On success, returns a JWT token.
+    - **Request Body:** `username` and `password`.
+
+---
+
+## Student Management
+
+- **Add Student**
+    - **POST** `/students`
+    - Add a new student.
+    - **Request Body:** `name`, `age`, `className`, `vaccinationStatus`
+
+- **Get All Students**
+    - **GET** `/students`
+    - Retrieve a list of all students.
+
+- **Update Student**
+    - **PUT** `/students/{id}`
+    - Update details of a student by their ID.
+    - **Request Body:** Updated student details.
+
+- **Delete Student**
+    - **DELETE** `/students/{id}`
+    - Remove a student by their ID.
+
+---
+
+## Vaccination Drive Management
+
+- **Add Vaccination Drive**
+    - **POST** `/drives`
+    - Add a new vaccination drive.
+    - **Request Body:** `vaccineName`, `driveDate`, `availableDoses`, `applicableClasses`
+
+- **Get All Drives**
+    - **GET** `/drives`
+    - Retrieve a list of all vaccination drives.
+
+- **Update Drive**
+    - **PUT** `/drives/{id}`
+    - Update a vaccination drive by its ID.
+    - **Request Body:** Updated drive details.
+
+- **Delete Drive**
+    - **DELETE** `/drives/{id}`
+    - Remove a vaccination drive by its ID.
+
+---
+
+## Vaccination Record Management
+
+- **Add Vaccination Record**
+    - **POST** `/api/vaccination-records`
+    - Add a new vaccination record linking a student to a vaccination drive.
+    - **Request Body:** `studentId`, `driveId`, `vaccinationDate`
+
+- **Get All Vaccination Records**
+    - **GET** `/api/vaccination-records`
+    - Retrieve all vaccination records.
+
+- **Get All Vaccination Record Details (Joined)**
+    - **GET** `/api/vaccination-records/details`
+    - Retrieve detailed vaccination records joined with corresponding student and drive info.
+
+---
+
+## Notes
+
+- **Format:** All endpoints accept and respond with JSON unless specified otherwise.
+- **Authentication:** Except for sign in/up, most endpoints require a valid JWT in the `Authorization` header.
+- **Error Handling:** Standard HTTP status codes and messages are used for unsuccessful operations.
+
+---
+

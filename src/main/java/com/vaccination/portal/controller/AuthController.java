@@ -33,7 +33,7 @@ import com.vaccination.portal.repository.UserRepository;
 import com.vaccination.portal.security.jwt.JwtUtils;
 import com.vaccination.portal.security.services.UserDetailsImpl;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {

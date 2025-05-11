@@ -58,7 +58,6 @@ public class VaccinationDrive {
     public void setApplicableClasses(String applicableClasses) {
         this.applicableClasses = applicableClasses;
     }
-
 }
 
 
